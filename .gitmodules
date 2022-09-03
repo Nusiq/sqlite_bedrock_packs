@@ -1,0 +1,3 @@
+[submodule "src/sqlite_bedrock_packs"]
+	path = src/sqlite_bedrock_packs
+	url = https://github.com/Nusiq/sqlite_bedrock_packs_core
