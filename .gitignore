@@ -1,4 +1,5 @@
 build/*
+tests/data/secret/**
 **/.mypy_cache/**
 dist/**
 **/*.egg-info/**
