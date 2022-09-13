@@ -1,3 +1,4 @@
+test_packs/**
 build/*
 tests/data/secret/**
 **/.mypy_cache/**

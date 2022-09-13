@@ -17,8 +17,10 @@ def test_rp_database_creation():
             "Please configure your local 'tests/data/secret/rp_path.txt' file."
             "The file should contain a path to Minecraft Resource Pack used "
             "for testing.")
+    rp_paths = []
     with secret_data_path.open("r") as f:
-        rp_path = Path(f.read())
+        for rp_path in f.readlines():
+            rp_paths.append(Path(rp_path.strip("\n")))
 
     print(
         f'The SQLite database file will be created at:\n'
@@ -26,5 +28,6 @@ def test_rp_database_creation():
 
     db_path.unlink(missing_ok=True)
     db = create_db(db_path)
-    load_rp(db, rp_path)
+    for rp_path in rp_paths:
+        load_rp(db, rp_path)
     db.commit()
