@@ -1,3 +1,4 @@
+docs/_build
 test_packs/**
 build/*
 tests/data/secret/**
