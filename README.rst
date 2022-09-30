@@ -7,7 +7,7 @@ SQLite bedrock packs
 Python package that loads data from Minecraft: Bedrock Edition packs into
 SQLite database.
 
-Documentation: https://nusiq.github.io/sqlite_bedrock_packs/
+Documentation: https://sqlite-bedrock-packs.readthedocs.io/en/latest/
 
 What it does?
 =============
