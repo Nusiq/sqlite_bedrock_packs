@@ -4,6 +4,8 @@ SQLite Bedrock Packs
 SQLite Bedrock Packs is a package that loads data from
 *Minecraft: Bedrock Edition* packs into SQLite database. 
 
+Source code: https://github.com/Nusiq/sqlite_bedrock_packs
+
 What it does?
 -------------
 The main purpose of this package is to make developing tools that validate
