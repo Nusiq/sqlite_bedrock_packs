@@ -294,6 +294,34 @@ ClientEntityTextureField
             ON DELETE CASCADE
     )
 
+Entity
+------
+
+.. code-block:: sql
+
+    CREATE TABLE Entity (
+        Entity_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        EntityFile_fk INTEGER NOT NULL,
+    
+        identifier TEXT NOT NULL,
+        FOREIGN KEY (EntityFile_fk) REFERENCES EntityFile (EntityFile_pk)
+            ON DELETE CASCADE
+    )
+
+EntityFile
+----------
+
+.. code-block:: sql
+
+    CREATE TABLE EntityFile (
+        EntityFile_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BehaviorPack_fk INTEGER,
+    
+        path Path NOT NULL,
+        FOREIGN KEY (BehaviorPack_fk) REFERENCES BehaviorPack (BehaviorPack_pk)
+            ON DELETE CASCADE
+    )
+
 Geometry
 --------
 
