@@ -417,6 +417,74 @@ GeometryFile
             ON DELETE CASCADE
     )
 
+LootTable
+---------
+
+.. code-block:: sql
+
+    CREATE TABLE LootTable (
+        LootTable_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        LootTableFile_fk INTEGER NOT NULL,
+    
+        -- Identifier of the loot table (path to the file relative to the behavior
+        -- pack root). Unike some other path based identifiers, this one includes
+        -- the file extension.
+        identifier TEXT NOT NULL,
+    
+        FOREIGN KEY (LootTableFile_fk) REFERENCES LootTableFile (LootTableFile_pk)
+            ON DELETE CASCADE
+    )
+
+LootTableFile
+-------------
+
+.. code-block:: sql
+
+    CREATE TABLE LootTableFile (
+        LootTableFile_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BehaviorPack_fk INTEGER,
+    
+        path Path NOT NULL,
+        FOREIGN KEY (BehaviorPack_fk) REFERENCES BehaviorPack (BehaviorPack_pk)
+            ON DELETE CASCADE
+    )
+
+LootTableItemField
+------------------
+
+.. code-block:: sql
+
+    CREATE TABLE LootTableItemField (
+        -- A reference to an item inside a loot table.
+    
+        LootTableItemField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        LootTable_fk INTEGER NOT NULL,
+    
+        identifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL,
+    
+        FOREIGN KEY (LootTable_fk) REFERENCES LootTable (LootTable_pk)
+            ON DELETE CASCADE
+    )
+
+LootTableLootTableField
+-----------------------
+
+.. code-block:: sql
+
+    CREATE TABLE LootTableLootTableField (
+        -- A reference to an loot table inside another loot table.
+    
+        LootTableLootTableField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        LootTable_fk INTEGER NOT NULL,
+    
+        identifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL,
+    
+        FOREIGN KEY (LootTable_fk) REFERENCES LootTable (LootTable_pk)
+            ON DELETE CASCADE
+    )
+
 Particle
 --------
 
