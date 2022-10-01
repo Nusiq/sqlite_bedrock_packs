@@ -322,6 +322,70 @@ EntityFile
             ON DELETE CASCADE
     )
 
+EntityLootField
+---------------
+
+.. code-block:: sql
+
+    CREATE TABLE EntityLootField (
+        EntityLootField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        Entity_fk INTEGER NOT NULL,
+    
+        identifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL,
+        componentType TEXT NOT NULL,
+    
+        FOREIGN KEY (Entity_fk) REFERENCES Entity (Entity_pk)
+            ON DELETE CASCADE
+        -- Constraint emulates enum
+        FOREIGN KEY (componentType) REFERENCES EntityLootFieldComponentTypeEnum (value)
+    )
+
+EntityLootFieldComponentTypeEnum
+--------------------------------
+
+.. code-block:: sql
+
+    CREATE TABLE EntityLootFieldComponentTypeEnum (
+        -- This table is used to store possible values for the 
+        -- EntityLootField.componentType column. Stores the names of the
+        -- components that can have a loot table reference (like 
+        -- "minecraft:loot" or "minecraft:equipment")
+        value TEXT PRIMARY KEY
+    )
+
+EntityTradeField
+----------------
+
+.. code-block:: sql
+
+    CREATE TABLE EntityTradeField (
+        EntityTradeField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        Entity_fk INTEGER NOT NULL,
+    
+        identifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL,
+        componentType TEXT NOT NULL,
+    
+        FOREIGN KEY (Entity_fk) REFERENCES Entity (Entity_pk)
+            ON DELETE CASCADE
+        -- Constraint emulates enum
+        FOREIGN KEY (componentType) REFERENCES EntityTradeFieldComponentTypeEnum (value)
+    )
+
+EntityTradeFieldComponentTypeEnum
+---------------------------------
+
+.. code-block:: sql
+
+    CREATE TABLE EntityTradeFieldComponentTypeEnum (
+        -- This table is used to store possible values for the
+        -- EntityTradeField.componentType column. Stores the names of the
+        -- components that can have a trade table reference (like
+        -- "minecraft:economy_trade_table" or "minecraft:trade_table")
+        value TEXT PRIMARY KEY
+    )
+
 Geometry
 --------
 
