@@ -73,3 +73,5 @@ Table of contents
    :maxdepth: 1
 
    functions
+   tables
+
