@@ -12,7 +12,7 @@ Documentation
 
 If you're looking for documentation please visit:
 
-https://sqlite-bedrock-packs.readthedocs.io/en/latest/
+https://sqlite-bedrock-packs.readthedocs.io/en/stable/
 
 Installation
 ------------
