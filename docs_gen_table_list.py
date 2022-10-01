@@ -29,7 +29,7 @@ def main():
         f.write(
             'List of tables\n'
             '==============\n\n'
-            "Currently, SQLite Bedrock Packs package does't support all of "
+            "Currently, SQLite Bedrock Packs package does't support some of "
             "the types of objects that you can find in Minecraft resourece "
             "packs and behavior packs. The following tables are the ones "
             "that are currently supported.\n\n"
