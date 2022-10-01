@@ -816,3 +816,54 @@ TextureFile
             ON DELETE CASCADE
     )
 
+TradeTable
+----------
+
+.. code-block:: sql
+
+    CREATE TABLE TradeTable (
+        TradeTable_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        TradeTableFile_fk INTEGER NOT NULL,
+    
+        -- Identifier of the trade table (path to the file relative to the behavior
+        -- pack root). Unike some other path based identifiers, this one includes
+        -- the file extension.
+        identifier TEXT NOT NULL,
+    
+        FOREIGN KEY (TradeTableFile_fk) REFERENCES TradeTableFile (TradeTableFile_pk)
+            ON DELETE CASCADE
+    )
+
+TradeTableFile
+--------------
+
+.. code-block:: sql
+
+    CREATE TABLE TradeTableFile (
+        TradeTableFile_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BehaviorPack_fk INTEGER,
+    
+        path Path NOT NULL,
+        FOREIGN KEY (BehaviorPack_fk) REFERENCES BehaviorPack (BehaviorPack_pk)
+            ON DELETE CASCADE
+    )
+
+TradeTableItemField
+-------------------
+
+.. code-block:: sql
+
+    CREATE TABLE TradeTableItemField (
+        -- A reference to an item inside a trade table.
+    
+        TradeTableItemField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        TradeTable_fk INTEGER NOT NULL,
+    
+        identifier TEXT NOT NULL,
+        dataValue INTEGER,
+        jsonPath TEXT NOT NULL,
+    
+        FOREIGN KEY (TradeTable_fk) REFERENCES TradeTable (TradeTable_pk)
+            ON DELETE CASCADE
+    )
+
