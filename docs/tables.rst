@@ -162,6 +162,66 @@ BehaviorPack
         path Path NOT NULL
     )
 
+BpAnimation
+-----------
+
+.. code-block:: sql
+
+    CREATE TABLE BpAnimation (
+        BpAnimation_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BpAnimationFile_fk INTEGER NOT NULL,
+    
+        identifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL,
+        
+        FOREIGN KEY (BpAnimationFile_fk) REFERENCES BpAnimationFile (BpAnimationFile_pk)
+            ON DELETE CASCADE
+    )
+
+BpAnimationController
+---------------------
+
+.. code-block:: sql
+
+    CREATE TABLE BpAnimationController (
+        BpAnimationController_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BpAnimationControllerFile_fk INTEGER NOT NULL,
+    
+        identifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL,
+        
+        FOREIGN KEY (BpAnimationControllerFile_fk) REFERENCES BpAnimationControllerFile (BpAnimationControllerFile_pk)
+            ON DELETE CASCADE
+    )
+
+BpAnimationControllerFile
+-------------------------
+
+.. code-block:: sql
+
+    CREATE TABLE BpAnimationControllerFile (
+        BpAnimationControllerFile_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BehaviorPack_fk INTEGER,
+    
+        path Path NOT NULL,
+        FOREIGN KEY (BehaviorPack_fk) REFERENCES BehaviorPack (BehaviorPack_pk)
+            ON DELETE CASCADE
+    )
+
+BpAnimationFile
+---------------
+
+.. code-block:: sql
+
+    CREATE TABLE BpAnimationFile (
+        BpAnimationFile_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BehaviorPack_fk INTEGER,
+    
+        path Path NOT NULL,
+        FOREIGN KEY (BehaviorPack_fk) REFERENCES BehaviorPack (BehaviorPack_pk)
+            ON DELETE CASCADE
+    )
+
 ClientEntity
 ------------
 
