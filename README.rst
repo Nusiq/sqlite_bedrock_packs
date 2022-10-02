@@ -20,3 +20,100 @@ Installation
 .. code-block:: bash
 
    pip install sqlite-bedrock-packs
+
+Changelog
+=========
+
+1.2.0
+-----
+
+- Added new tables:
+    - BpAnimation
+    - BpAnimationController
+    - BpAnimationControllerFile
+    - BpAnimationFile
+    - BpItem
+    - BpItemFile
+    - BpItemParserVersionEnum
+    - EntityLootField
+    - EntityLootFieldComponentTypeEnum
+    - EntityTradeField
+    - EntityTradeFieldComponentTypeEnum
+    - LootTable
+    - LootTableFile
+    - LootTableItemField
+    - LootTableLootTableField
+    - RpItem
+    - RpItemFile
+    - TradeTable
+    - TradeTableFile
+    - TradeTableItemField
+
+- Added new fields to the entity
+    - LootTable
+    - TradeTable
+
+1.1.1
+-----
+
+Fixed crashes caused by missing client_entity identifier.
+
+1.1.0
+-----
+
+- Added new tables:
+    - BehaviorPack
+    - Entity
+    - EntityFile
+    - SoundDefinition
+    - SoundDefinitionSoundField
+    - SoundDefinitionsFile
+    - SoundFile
+
+- Added type annotations and py.typed file.
+- renamed better_json module to better_json_tools
+
+1.0.2
+-----
+
+- Supported objects:
+    - Attachable
+    - AttachableAnimationControllerField
+    - AttachableAnimationField
+    - AttachableFile
+    - AttachableGeometryField
+    - AttachableItemField
+    - AttachableMaterialField
+    - AttachableRenderControllerField
+    - AttachableTextureField
+    - ClientEntity
+    - ClientEntityAnimationControllerField
+    - ClientEntityAnimationField
+    - ClientEntityFile
+    - ClientEntityGeometryField
+    - ClientEntityMaterialField
+    - ClientEntityRenderControllerField
+    - ClientEntityTextureField
+    - Geometry
+    - GeometryFile
+    - Particle
+    - ParticleFile
+    - RenderController
+    - RenderControllerFile
+    - RenderControllerGeometryField
+    - RenderControllerMaterialsField
+    - RenderControllerTexturesField
+    - ResourcePack
+    - RpAnimation
+    - RpAnimationController
+    - RpAnimationControllerFile
+    - RpAnimationControllerParticleEffect
+    - RpAnimationControllerSoundEffect
+    - RpAnimationFile
+    - RpAnimationParticleEffect
+    - RpAnimationSoundEffect
+    - TextureFile
+
+Older releases
+--------------
+No changelog for releases before PyPI
