@@ -117,3 +117,4 @@ Fixed crashes caused by missing client_entity identifier.
 Older releases
 --------------
 No changelog for releases before PyPI
+
