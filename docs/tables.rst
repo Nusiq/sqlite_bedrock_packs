@@ -222,6 +222,56 @@ BpAnimationFile
             ON DELETE CASCADE
     )
 
+BpItem
+------
+
+.. code-block:: sql
+
+    CREATE TABLE BpItem (
+        BpItem_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BpItemFile_fk INTEGER NOT NULL,
+    
+        identifier TEXT NOT NULL,
+        -- The version of the parser. The value is based on fromat_version property
+        -- of the file or matching schema (when format_version is missing).
+        -- It divides the items into two groups 1.10 and 1.16.100. Most of the
+        -- format_versions in Minecraft don't change the format so you need only
+        -- two parsers to handle all the items.
+        parserVersion TEXT NOT NULL,
+        -- The texture of the item. It only exists in 1.16.100+ items.
+        texture TEXT,
+        
+        FOREIGN KEY (BpItemFile_fk) REFERENCES BpItemFile (BpItemFile_pk)
+            ON DELETE CASCADE
+        -- Constraint emulates enum
+        FOREIGN KEY (parserVersion) REFERENCES BpItemParserVersionEnum (value)
+    )
+
+BpItemFile
+----------
+
+.. code-block:: sql
+
+    CREATE TABLE BpItemFile (
+        BpItemFile_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BehaviorPack_fk INTEGER,
+    
+        path Path NOT NULL,
+        FOREIGN KEY (BehaviorPack_fk) REFERENCES BehaviorPack (BehaviorPack_pk)
+            ON DELETE CASCADE
+    )
+
+BpItemParserVersionEnum
+-----------------------
+
+.. code-block:: sql
+
+    CREATE TABLE BpItemParserVersionEnum (
+        -- Emulates enum type. Stores possible value of BpItem.parserVersion
+        --- column.
+        value TEXT PRIMARY KEY
+    )
+
 ClientEntity
 ------------
 
