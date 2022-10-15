@@ -24,6 +24,12 @@ Installation
 Changelog
 =========
 
+2.0.0
+-----
+
+Restructured the project to be more object oriented, added EasyQuery object.
+
+
 1.2.0
 -----
 

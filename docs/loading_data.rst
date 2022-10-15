@@ -10,3 +10,4 @@ Loading the database
 .. autodata:: DbBpItems
 
 .. autoclass:: Database
+    :members:
