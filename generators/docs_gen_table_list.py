@@ -5,12 +5,12 @@ automatically with Sphinx.
 '''
 from __future__ import annotations
 from pathlib import Path
-from sqlite_bedrock_packs import create_db
+from sqlite_bedrock_packs import Database
 
 OUTPUT_PATH = Path("docs/tables.rst")
 
 def main():
-    db = create_db()
+    db = Database.create().connection
     cursor = db.execute(
         '''
         SELECT

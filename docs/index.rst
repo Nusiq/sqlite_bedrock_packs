@@ -48,21 +48,48 @@ a resource pack and prints the list of all of the entities in the pack.
 
 .. code-block:: Python
 
-   from sqlite_bedrock_packs import create_db, load_rp
+   from typing import cast
+   from sqlite_bedrock_packs import Database, EasyQuery
+   from sqlite_bedrock_packs.wrappers import ClientEntity, Geometry
 
-   # Create a new database in memory
-   db = create_db()
+   # Create a new database
+   db = Database.create()
 
-   # Load a resource pack
-   load_rp(
-      db, "path/to/resource_pack",
-      include=["client_entities"]  # We don't need to load more
-   )
+   # Load a resourcepack, to make it faster only include objects that we need
+   db.load_rp("packs/RP", include=["client_entities", "geometries"])
 
-   # Run SQL query and print the results. This is just a simple example but
-   # the queries can be way more complex.
-   for identifier in db.execute("SELECT identifier FROM ClientEntity;"):
-      print(identifier[0])
+   # Create query for listing all entities that have a with a geometry
+   query = EasyQuery.build(db, "ClientEntity", "Geometry")
+   # Above object automatically finds the connections between the tables, based on
+   # a graph of the databse. In this case it is very simple, because listed tables
+   # are connected almost directly but things like for example finding all
+   # RP animatoins connected to an BP entity are also possible.
+
+
+   # Print the SQL query that was used
+   print(query.sql_code)
+   # SELECT DISTINCT
+   #         ClientEntity_pk AS ClientEntity,
+   #         Geometry_pk AS Geometry
+   # FROM ClientEntity
+   # JOIN ClientEntityGeometryField
+   #         ON ClientEntity.ClientEntity_pk = ClientEntityGeometryField.ClientEntity_fk
+   # JOIN Geometry
+   #         ON ClientEntityGeometryField.identifier = Geometry.identifier
+
+
+
+   # Run SQL query and print the results. The wrappers returned by the query
+   # take care of converting the primary keys to actual objects. Note that
+   # the query returns only the primary keys of the objects listed in the
+   # build() method even if there are other tables which were used to join
+   # the data and find meaningful connections.
+   for ce, geo in query.yield_wrappers():
+      # You can cast 'ce' and 'geo' to the actual objects here for hints in IDE
+      # but you don't have to.
+      ce = cast(ClientEntity, ce)
+      geo = cast(Geometry, geo)
+      print(ce.identifier, geo.identifier)
 
 
 
@@ -72,6 +99,7 @@ Table of contents
 .. toctree::
    :maxdepth: 1
 
-   functions
+   loading_data
+   queries
    tables
 
