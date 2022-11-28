@@ -27,6 +27,16 @@ Changelog
 2.0.0
 -----
 
+Added new tables for storing the information about relations of entity spawn eggs
+and their presence in loot tables and the trade tables:
+
+- LootTableItemSpawnEggReferenceField
+- TradeTableItemSpawnEggReferenceField
+- EntitySpawnEggField
+
+2.0.0
+-----
+
 Restructured the project to be more object oriented, added EasyQuery object.
 
 
