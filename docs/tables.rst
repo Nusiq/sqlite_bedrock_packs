@@ -464,6 +464,25 @@ EntityLootFieldComponentTypeEnum
         value TEXT PRIMARY KEY
     )
 
+EntitySpawnEggField
+-------------------
+
+.. code-block:: sql
+
+    CREATE TABLE EntitySpawnEggField (
+        -- Spawn eggs are added to the database based on entities that use the
+        -- is_spawnable property. The name of the spawn egg is based on the entity
+        -- identifier.
+    
+        EntitySpawnEggField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        Entity_fk INTEGER NOT NULL,
+    
+        identifier TEXT NOT NULL,
+    
+        FOREIGN KEY (Entity_fk) REFERENCES Entity (Entity_pk)
+            ON DELETE CASCADE
+    )
+
 EntityTradeField
 ----------------
 
@@ -575,6 +594,44 @@ LootTableItemField
     
         FOREIGN KEY (LootTable_fk) REFERENCES LootTable (LootTable_pk)
             ON DELETE CASCADE
+    )
+
+LootTableItemSpawnEggReferenceField
+-----------------------------------
+
+.. code-block:: sql
+
+    CREATE TABLE LootTableItemSpawnEggReferenceField (
+        -- A reference to a spawn egg inside an item inside a loot table.
+    
+        LootTableItemSpawnEggReferenceField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        LootTableItemField_fk INTEGER NOT NULL,
+    
+        entityIdentifier TEXT NOT NULL,
+        spawnEggIdentifier TEXT NOT NULL,
+        connectionType TEXT NOT NULL,
+    
+        -- If connectionType is direct, it points at the identifier
+        jsonPath TEXT NOT NULL,
+    
+        FOREIGN KEY (LootTableItemField_fk) REFERENCES LootTableItemField (LootTableItemField_pk)
+            ON DELETE CASCADE
+        -- Constraint emulates enum
+        FOREIGN KEY (connectionType) REFERENCES
+            LootTableItemSpawnEggReferenceFieldConnectinTypeEnum (value)
+    )
+
+LootTableItemSpawnEggReferenceFieldConnectinTypeEnum
+----------------------------------------------------
+
+.. code-block:: sql
+
+    CREATE TABLE LootTableItemSpawnEggReferenceFieldConnectinTypeEnum (
+        -- This table is used to store possible values for the
+        -- LootTableItemSpawnEggReferenceField.connectionType column.
+        -- Stores the type of connection, it can be either "direct" or
+        -- "set_actor_id_function".
+        value TEXT PRIMARY KEY
     )
 
 LootTableLootTableField

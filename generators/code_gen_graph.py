@@ -124,6 +124,12 @@ NON_PK_RELATIONS: dict[str, dict[str, _TableConnection]] = {
             is_pk=False
         )
     },
+    "LootTableItemSpawnEggReferenceField": {
+        "EntitySpawnEggField": _TableConnection(
+            columns=("spawnEggIdentifier", "identifier"),
+            is_pk=False,
+        )
+    },
     "LootTableLootTableField": {
         "LootTable": _TableConnection(
             columns=("identifier", "identifier"),
