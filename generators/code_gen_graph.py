@@ -146,6 +146,12 @@ NON_PK_RELATIONS: dict[str, dict[str, _TableConnection]] = {
             is_pk=False
         )
     },
+    "TradeTableItemSpawnEggReferenceField": {
+        "EntitySpawnEggField": _TableConnection(
+            columns=("spawnEggIdentifier", "identifier"),
+            is_pk=False,
+        )
+    },
     "Particle": {
         "TextureFile": _TableConnection(
             columns=("texture", "identifier"),

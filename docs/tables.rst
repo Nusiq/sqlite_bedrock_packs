@@ -1064,3 +1064,22 @@ TradeTableItemField
             ON DELETE CASCADE
     )
 
+TradeTableItemSpawnEggReferenceField
+------------------------------------
+
+.. code-block:: sql
+
+    CREATE TABLE TradeTableItemSpawnEggReferenceField (
+        -- A reference to a spawn egg inside an item inside a trade table.
+    
+        TradeTableItemSpawnEggReferenceField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        TradeTableItemField_fk INTEGER NOT NULL,
+    
+        entityIdentifier TEXT NOT NULL,
+        spawnEggIdentifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL,
+    
+        FOREIGN KEY (TradeTableItemField_fk) REFERENCES TradeTableItemField (TradeTableItemField_pk)
+            ON DELETE CASCADE
+    )
+
