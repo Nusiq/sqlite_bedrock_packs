@@ -17,6 +17,7 @@ from __future__ import annotations
 from functools import cache
 from sqlite3 import Connection
 from pathlib import Path
+from typing import Union
 
 '''
 
@@ -148,11 +149,11 @@ def sql_to_python_type(type_: str, optional: bool) -> str:
     Translates a SQLite type to a Python type name
     '''
     if type_ == 'TEXT':
-        return 'str' if optional else 'str | None'
+        return 'str' if optional else 'Union[str, None]'
     if type_ == 'INTEGER':
-        return 'int' if optional else 'int | None'
+        return 'int' if optional else 'Union[int, None]'
     if type_ == 'Path':
-        return 'Path' if optional else 'Path | None'
+        return 'Path' if optional else 'Union[Path, None]'
     raise ValueError(f"Unknown type {type_}")
 
 def get_wrapper_classes_var(db) -> str:

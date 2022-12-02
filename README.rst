@@ -24,7 +24,12 @@ Installation
 Changelog
 =========
 
-2.0.0
+2.1.1
+-----
+
+Changed the minimal supported version of Python from 3.10 to 3.9
+
+2.1.0
 -----
 
 Added new tables for storing the information about relations of entity spawn eggs
