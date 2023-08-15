@@ -23,6 +23,11 @@ Installation
 
 Changelog
 =========
+3.0.1
+-----
+
+Removed from the code the use of an unsupported on Python 3.9 TypeVarTupl type annotation.
+
 3.0.0
 -----
 
