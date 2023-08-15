@@ -48,48 +48,44 @@ a resource pack and prints the list of all of the entities in the pack.
 
 .. code-block:: Python
 
-   from typing import cast
-   from sqlite_bedrock_packs import Database, EasyQuery
-   from sqlite_bedrock_packs.wrappers import ClientEntity, Geometry
+  from typing import cast
+  from sqlite_bedrock_packs import (
+    Database, build_easy_query, ClientEntity, Geometry, Left
+  )
 
-   # Create a new database
-   db = Database.create()
+  # Create a new database
+  db = Database.create()
 
-   # Load a resourcepack, to make it faster only include objects that we need
-   db.load_rp("packs/RP", include=["client_entities", "geometries"])
+  # Load a resourcepack, to make it faster only include objects that we need
+  db.load_rp("packs/RP", include=["client_entities", "geometries"])
 
-   # Create query for listing all entities that have a with a geometry
-   query = EasyQuery.build(db, "ClientEntity", "Geometry")
-   # Above object automatically finds the connections between the tables, based on
-   # a graph of the databse. In this case it is very simple, because listed tables
-   # are connected almost directly but things like for example finding all
-   # RP animatoins connected to an BP entity are also possible.
+  # Create query for listing all entities that have a with a geometry
+  query = build_easy_query(db, ClientEntity, Left(Geometry))
+  # Generated query automatically finds the connections between the tables,
+  # based on a graph of the databse. In this case it is very simple, because
+  # listed tables are connected almost directly but things like for example
+  # finding all RP animatoins connected to an BP entity are also possible.
+  # The Left() function marks the Geometry for a LEFT JOIN in the query.
 
-
-   # Print the SQL query that was used
-   print(query.sql_code)
-   # SELECT DISTINCT
-   #         ClientEntity_pk AS ClientEntity,
-   #         Geometry_pk AS Geometry
-   # FROM ClientEntity
-   # JOIN ClientEntityGeometryField
-   #         ON ClientEntity.ClientEntity_pk = ClientEntityGeometryField.ClientEntity_fk
-   # JOIN Geometry
-   #         ON ClientEntityGeometryField.identifier = Geometry.identifier
-
+  print(query.sql_code)
+  # SELECT DISTINCT
+  #         ClientEntity_pk AS ClientEntity,
+  #         Geometry_pk AS Geometry
+  # FROM ClientEntity
+  # JOIN ClientEntityGeometryField
+  #         ON ClientEntity.ClientEntity_pk = ClientEntityGeometryField.ClientEntity_fk
+  # LEFT JOIN Geometry
+  #         ON ClientEntityGeometryField.identifier = Geometry.identifier
 
 
-   # Run SQL query and print the results. The wrappers returned by the query
-   # take care of converting the primary keys to actual objects. Note that
-   # the query returns only the primary keys of the objects listed in the
-   # build() method even if there are other tables which were used to join
-   # the data and find meaningful connections.
-   for ce, geo in query.yield_wrappers():
-      # You can cast 'ce' and 'geo' to the actual objects here for hints in IDE
-      # but you don't have to.
-      ce = cast(ClientEntity, ce)
-      geo = cast(Geometry, geo)
-      print(ce.identifier, geo.identifier)
+
+  # Run SQL query and print the results. The wrappers returned by the query
+  # take care of converting the primary keys to actual objects. Note that
+  # the query returns only the primary keys of the objects listed in the
+  # build() method even if there are other tables which were used to join
+  # the data and find meaningful connections.
+  for ce, geo in yield_from_easy_query(db, ClientEntity, Geometry):
+     print(ce.identifier, geo.identifier)
 
 
 

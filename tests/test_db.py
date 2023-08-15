@@ -1,6 +1,7 @@
 from pathlib import Path
 import re
-from sqlite_bedrock_packs import Database, EasyQuery, Left
+from sqlite_bedrock_packs import (
+    Database, Left, EntityFile, RpAnimationControllerFile, build_easy_query)
 from sqlite_bedrock_packs.better_json_tools import load_jsonc
 
 
@@ -64,15 +65,14 @@ def test_easy_query():
             EntityFile.EntityFile_pk == 1
             AND RpAnimationControllerFile.RpAnimationControllerFile_pk == 1
     '''
-    actual_result = EasyQuery.build(
-        None,  # normally, this would be a database connection
-        "EntityFile", Left("RpAnimationControllerFile"),
+    actual_result = build_easy_query(
+        EntityFile, Left(RpAnimationControllerFile),
         accept_non_pk=True,
         where=[
             "EntityFile.EntityFile_pk == 1",
             "RpAnimationControllerFile.RpAnimationControllerFile_pk == 1"
         ]
-    ).sql_code  # We only care about the query string, not the result
+    )
 
     pattern = re.compile(r'\s+')
     # Assert that expected == actual (ignoring whitespace)
