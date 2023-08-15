@@ -23,6 +23,17 @@ Installation
 
 Changelog
 =========
+3.0.0
+-----
+
+Removed the EasyQuery object and relpaced it with functions:
+
+- build_easy_query
+- yield_from_easy_query
+- yield_from_any_query
+
+The functions are properly annotated so their results don't requrie casting
+to the wrapper classes anymore.
 
 2.1.1
 -----
