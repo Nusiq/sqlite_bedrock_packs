@@ -23,6 +23,16 @@ Installation
 
 Changelog
 =========
+
+3.0.2
+-----
+
+Fixed invalid caching and extended the annotations:
+
+- The table properties used to always return the values from the first row of the table that run 'query_result' function
+- The annotation for creating table classes was mostly rewritten with a custom solution that doesn't use 'namedtuple' anymore (it shouldn't be noticable from user perspective).
+- Added 'build_query' to annotations
+
 3.0.1
 -----
 
