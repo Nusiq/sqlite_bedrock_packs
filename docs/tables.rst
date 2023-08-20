@@ -185,6 +185,83 @@ BpAnimationFile
         FOREIGN KEY (BehaviorPack_fk) REFERENCES BehaviorPack (BehaviorPack_pk) ON DELETE CASCADE
     )
 
+BpBlock
+-------
+
+.. code-block:: sql
+
+    CREATE TABLE BpBlock (
+        BpBlock_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BpBlockFile_fk INTEGER NOT NULL,
+        identifier TEXT NOT NULL,
+        FOREIGN KEY (BpBlockFile_fk) REFERENCES BpBlockFile (BpBlockFile_pk) ON DELETE CASCADE
+    )
+
+BpBlockFile
+-----------
+
+.. code-block:: sql
+
+    CREATE TABLE BpBlockFile (
+        BpBlockFile_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BehaviorPack_fk INTEGER NOT NULL,
+        path Path NOT NULL,
+        FOREIGN KEY (BehaviorPack_fk) REFERENCES BehaviorPack (BehaviorPack_pk) ON DELETE CASCADE
+    )
+
+BpBlockGeometryField
+--------------------
+
+.. code-block:: sql
+
+    CREATE TABLE BpBlockGeometryField (
+        BpBlockGeometryField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BpBlock_fk INTEGER NOT NULL,
+        identifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL,
+        FOREIGN KEY (BpBlock_fk) REFERENCES BpBlock (BpBlock_pk) ON DELETE CASCADE
+    )
+
+BpBlockLootField
+----------------
+
+.. code-block:: sql
+
+    CREATE TABLE BpBlockLootField (
+        BpBlockLootField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BpBlock_fk INTEGER NOT NULL,
+        identifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL,
+        FOREIGN KEY (BpBlock_fk) REFERENCES BpBlock (BpBlock_pk) ON DELETE CASCADE
+    )
+
+BpBlockMaterialInstancesField
+-----------------------------
+
+.. code-block:: sql
+
+    CREATE TABLE BpBlockMaterialInstancesField (
+        BpBlockMaterialInstancesField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BpBlock_fk INTEGER NOT NULL,
+        jsonPath TEXT NOT NULL,
+        FOREIGN KEY (BpBlock_fk) REFERENCES BpBlock (BpBlock_pk) ON DELETE CASCADE
+    )
+
+BpBlockMaterialInstancesFieldInstance
+-------------------------------------
+
+.. code-block:: sql
+
+    CREATE TABLE BpBlockMaterialInstancesFieldInstance (
+        BpBlockMaterialInstancesFieldInstance_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BpBlockMaterialInstancesField_fk INTEGER NOT NULL,
+        identifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL,
+        texture TEXT NOT NULL,
+        renderMethod TEXT NOT NULL,
+        FOREIGN KEY (BpBlockMaterialInstancesField_fk) REFERENCES BpBlockMaterialInstancesField (BpBlockMaterialInstancesField_pk) ON DELETE CASCADE
+    )
+
 BpItem
 ------
 

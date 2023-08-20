@@ -25,7 +25,7 @@ def main():
         output.extend("    " + line for line in class_body)
 
 
-    output = [f"import {module}" for module in modules] + output
+    output = [f"import {module}" for module in sorted(modules)] + output
     output_dir.write_text("\n".join(output))
     
 
