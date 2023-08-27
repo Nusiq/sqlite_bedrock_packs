@@ -24,6 +24,21 @@ Installation
 Changelog
 =========
 
+3.1.0
+-----
+
+Added new tables for behavior pack blocks and terrain textures:
+
+- BpBlockFile
+- BpBlock
+- BpBlockLootField
+- BpBlockGeometryField
+- BpBlockMaterialInstancesField
+- BpBlockMaterialInstancesFieldInstance
+- TerrainTextureFile
+- TerrainTexture
+- TerrainTextureVariation
+
 3.0.2
 -----
 

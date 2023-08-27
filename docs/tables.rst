@@ -876,6 +876,48 @@ SoundFile
         FOREIGN KEY (ResourcePack_fk) REFERENCES ResourcePack (ResourcePack_pk) ON DELETE CASCADE
     )
 
+TerrainTexture
+--------------
+
+.. code-block:: sql
+
+    CREATE TABLE TerrainTexture (
+        TerrainTexture_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        TerrainTextureFile_fk INTEGER NOT NULL,
+        identifier TEXT NOT NULL,
+        FOREIGN KEY (TerrainTextureFile_fk) REFERENCES TerrainTextureFile (TerrainTextureFile_pk) ON DELETE CASCADE
+    )
+
+TerrainTextureFile
+------------------
+
+.. code-block:: sql
+
+    CREATE TABLE TerrainTextureFile (
+        TerrainTextureFile_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        ResourcePack_fk INTEGER NOT NULL,
+        path Path NOT NULL,
+        FOREIGN KEY (ResourcePack_fk) REFERENCES ResourcePack (ResourcePack_pk) ON DELETE CASCADE
+    )
+
+TerrainTextureVariation
+-----------------------
+
+.. code-block:: sql
+
+    CREATE TABLE TerrainTextureVariation (
+        TerrainTextureVariation_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        TerrainTexture_fk INTEGER NOT NULL,
+        identifier TEXT NOT NULL,
+        jsonPath Path NOT NULL,
+        variantIndex INTEGER,
+        variationIndex INTEGER,
+        weight INTEGER,
+        tintColor TEXT,
+        overlayColor TEXT,
+        FOREIGN KEY (TerrainTexture_fk) REFERENCES TerrainTexture (TerrainTexture_pk) ON DELETE CASCADE
+    )
+
 TextureFile
 -----------
 
