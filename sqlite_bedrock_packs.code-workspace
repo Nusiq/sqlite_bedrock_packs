@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"python.analysis.typeCheckingMode": "strict",
+		"search.exclude": {
+			"build": true
+		},
+		"files.exclude": {
+			"build": true
+		},
+		"files.watcherExclude": {
+			"build": true
+		},
+		"python.analysis.exclude": ["build"]
+	}
+}

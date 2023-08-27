@@ -24,6 +24,11 @@ Installation
 Changelog
 =========
 
+3.1.1
+-----
+
+Better type hints.
+
 3.1.0
 -----
 

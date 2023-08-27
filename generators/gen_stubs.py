@@ -10,13 +10,15 @@ def main():
     the_py_file = Path("src/sqlite_bedrock_packs/views.py")
 
     output: list[str] = the_py_file.read_text().splitlines()
-    modules = set()
+    modules: set[str] = set()
 
-    for v in sqlbp._views.WRAPPER_CLASSES.values():
+    for v in sqlbp._views.WRAPPER_CLASSES.values():  # type: ignore
         output.append(f"class {v.__name__}(AbstractDBView):")
         class_body: list[str] = []
         for k, v in v.__annotations__.items():
-            if v.__module__ == "builtins":
+            if isinstance(v, str):
+                type_ = v
+            elif v.__module__ == "builtins":
                 type_ = f"{v.__qualname__}"
             else:
                 type_ = f"{v.__module__}.{v.__qualname__}"

@@ -1,3 +1,4 @@
+from typing import cast
 from pathlib import Path
 import re
 from sqlite_bedrock_packs import (
@@ -29,7 +30,9 @@ def test_rp_database_creation():
             f"{PACK_PATHS_STRUCTURE}")
     packs_data = load_jsonc(secret_data_path)
     rp_paths = (packs_data / "rp_paths").data
+    rp_paths = cast(list[str], rp_paths)
     bp_paths = (packs_data / "bp_paths").data
+    bp_paths = cast(list[str], bp_paths)
     print(
         f'The SQLite database file will be created in:\n'
         f'\t{db_path.as_posix()}')
