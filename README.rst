@@ -24,6 +24,20 @@ Installation
 Changelog
 =========
 
+3.2.0
+-----
+
+Added new tables:
+
+- FeatureFile
+- Feature
+- FeaturePlacesFeatureField
+- FeaturePlacesFeatureFieldValue
+- FeatureFeaturetypeEnum
+- FeatureRuleFile
+- FeatureRule
+
+
 3.1.1
 -----
 

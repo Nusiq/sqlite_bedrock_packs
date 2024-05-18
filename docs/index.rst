@@ -50,7 +50,7 @@ a resource pack and prints the list of all of the entities in the pack.
 
   from typing import cast
   from sqlite_bedrock_packs import (
-    Database, build_easy_query, ClientEntity, Geometry, Left
+    Database, build_easy_query, ClientEntity, Geometry, Left, yield_from_easy_query
   )
 
   # Create a new database
@@ -60,7 +60,7 @@ a resource pack and prints the list of all of the entities in the pack.
   db.load_rp("packs/RP", include=["client_entities", "geometries"])
 
   # Create query for listing all entities that have a with a geometry
-  query = build_easy_query(db, ClientEntity, Left(Geometry))
+  query = build_easy_query(ClientEntity, Left(Geometry))
   # Generated query automatically finds the connections between the tables,
   # based on a graph of the databse. In this case it is very simple, because
   # listed tables are connected almost directly but things like for example

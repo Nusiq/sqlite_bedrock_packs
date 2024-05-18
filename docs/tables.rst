@@ -490,6 +490,91 @@ EntityTradeFieldComponenttypeEnum
         value TEXT PRIMARY KEY
     )
 
+Feature
+-------
+
+.. code-block:: sql
+
+    CREATE TABLE Feature (
+        Feature_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        FeatureFile_fk INTEGER NOT NULL,
+        featureType TEXT NOT NULL,
+        identifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL,
+        FOREIGN KEY (FeatureFile_fk) REFERENCES FeatureFile (FeatureFile_pk) ON DELETE CASCADE,
+        FOREIGN KEY (featureType) REFERENCES FeatureFeaturetypeEnum (value)
+    )
+
+FeatureFeaturetypeEnum
+----------------------
+
+.. code-block:: sql
+
+    CREATE TABLE FeatureFeaturetypeEnum (
+        value TEXT PRIMARY KEY
+    )
+
+FeatureFile
+-----------
+
+.. code-block:: sql
+
+    CREATE TABLE FeatureFile (
+        FeatureFile_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BehaviorPack_fk INTEGER NOT NULL,
+        path Path NOT NULL,
+        FOREIGN KEY (BehaviorPack_fk) REFERENCES BehaviorPack (BehaviorPack_pk) ON DELETE CASCADE
+    )
+
+FeaturePlacesFeatureField
+-------------------------
+
+.. code-block:: sql
+
+    CREATE TABLE FeaturePlacesFeatureField (
+        FeaturePlacesFeatureField_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        Feature_fk INTEGER NOT NULL,
+        FeaturePlacesFeatureFieldValue_fk INTEGER NOT NULL,
+        FOREIGN KEY (Feature_fk) REFERENCES Feature (Feature_pk) ON DELETE CASCADE,
+        FOREIGN KEY (FeaturePlacesFeatureFieldValue_fk) REFERENCES FeaturePlacesFeatureFieldValue (FeaturePlacesFeatureFieldValue_pk) ON DELETE CASCADE
+    )
+
+FeaturePlacesFeatureFieldValue
+------------------------------
+
+.. code-block:: sql
+
+    CREATE TABLE FeaturePlacesFeatureFieldValue (
+        FeaturePlacesFeatureFieldValue_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        identifier TEXT NOT NULL,
+        jsonPath TEXT NOT NULL
+    )
+
+FeatureRule
+-----------
+
+.. code-block:: sql
+
+    CREATE TABLE FeatureRule (
+        FeatureRule_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        FeatureRuleFile_fk INTEGER NOT NULL,
+        identifier TEXT NOT NULL,
+        placesFeature TEXT,
+        FOREIGN KEY (FeatureRuleFile_fk) REFERENCES FeatureRuleFile (FeatureRuleFile_pk) ON DELETE CASCADE
+    )
+
+FeatureRuleFile
+---------------
+
+.. code-block:: sql
+
+    CREATE TABLE FeatureRuleFile (
+        FeatureRuleFile_pk INTEGER PRIMARY KEY AUTOINCREMENT,
+        BehaviorPack_fk INTEGER NOT NULL,
+        path Path NOT NULL,
+        FOREIGN KEY (BehaviorPack_fk) REFERENCES BehaviorPack (BehaviorPack_pk) ON DELETE CASCADE
+    )
+
 Geometry
 --------
 
